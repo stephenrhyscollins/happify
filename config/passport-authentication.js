@@ -23,23 +23,30 @@ passport.use(
   )
 );
 //Google login call callback
+
 function googleCallback(accessToken, refreshToken, profile, done){
    User.findOne({googleId : profile.id}).then((user) => {
-     if(!user){user = createUser(profile);}
-     done(null, user);
+     if(!user){
+       user = createUser(profile).then((user) => {
+         done(null,user);
+       });
+     }else{done(null, user)};
    });
  };
 
-function createUser(profile){
-  new User({
-    email : profile.emails[0].value,
-    googleId : profile.id,
-    name : profile.name,
-    gender : profile.gender,
-    profileImage : profile._json.image.url
-  }).save().then((user) => {
-    console.log('User created\n' + user);
-    return user;
+ //modify these methods to check for Facebook or
+
+var createUser = function(profile){
+  return new Promise(function(resolve, reject){
+    new User({
+      email : profile.emails[0].value,
+      googleId : profile.id,
+      name : profile.name,
+      gender : profile.gender,
+      profileImage : profile._json.image.url
+    }).save().then((user) => {
+        resolve(user);
+    });
   });
 }
 
