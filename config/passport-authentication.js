@@ -22,7 +22,7 @@ passport.use(
     credentials.GOOGLE,(accessToken, refreshToken, profile, done) => googleCallback(accessToken, refreshToken, profile, done)
   )
 );
-//Google login call callback
+//Google login cal l callback
 
 function googleCallback(accessToken, refreshToken, profile, done){
    User.findOne({googleId : profile.id}).then((user) => {

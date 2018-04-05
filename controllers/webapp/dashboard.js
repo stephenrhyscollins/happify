@@ -12,7 +12,7 @@ router.get('/', authCheck, (req, res) => {
 
 
 
-//doesn't work as using express
+//doesn't  work as using express
 //creates a read stream that reads a file buffered and then piped
 router.get('/pipedatafromfile', (req, res, next) => {
   console.log(`request from: ${req.url}`);
