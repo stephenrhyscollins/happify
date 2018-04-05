@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="../assets/stylesheets/style.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" ></script>
+	<script src="../assets/js/script.js"></script>
+</head>
+
+<body class="bg-light-grey">
+
+<main>
+	<aside id="profile" class="bg-dark-grey">
+		<h1 class="text-title">Happify</h1>
+		<hr/>
+		<div class = "flex-vertical-center group-together-vertical">
+			<div class="img-frame">
+				<img src="<%=user.profileImage %>"/>
+			</div>
+			<p><%=user.name.givenName + " " + user.name.familyName%></p>
+			<a href="/auth/signout">Sign out</a>
+		</div>
+
+		<hr/>
+
+		<ul>
+			<li><a href='#'>Planner</a></li>
+			<li><a href='#'>Progress</a></li>
+			<li><a href='#'>Settings</a></li>
+		</ul>
+	</aside>
+
+	<section id="content">
+		<h2 class="text-section-title">My schedule</h2>
+		<table id="planner">
+			<!--populate with js-->
+		</table>
+	</section>
+	<section id="side" class="bg-dark-grey">
+			<h1>Suggested activities</h1>
+			<ul>
+
+				<li class="suggested event card">
+					<h1>Photography</h1>
+					<p class="body"></p>
+					<div class="detail">
+						<div class="">
+							<img class="icon" src="../assets/images/png/happy.png"/>
+							<p>90%</p>
+						</div>
+						<div class="">
+							<img class="icon" src="../assets/images/svg/difficulty10.svg"/>
+							<p>100%</p>
+						</div>
+						<div class="">
+							<img class="icon" src="../assets/images/svg/achieve.svg"/>
+							<p>95%</p>
+						</div>
+					</div>
+
+				</li>
+
+				<li class="suggested event card">
+					<h1>Cycling</h1>
+					<p class="body"></p>
+					<div class="detail">
+						<div class="">
+							<img class="icon" src="../assets/images/png/happy.png"/>
+							<p>80%</p>
+						</div>
+						<div class="">
+							<img class="icon" src="../assets/images/svg/difficulty7.svg"/>
+							<p>70%</p>
+						</div>
+						<div class="">
+							<img class="icon" src="../assets/images/svg/achieve.svg"/>
+							<p>75%</p>
+						</div>
+					</div>
+
+				</li>
+
+
+			</ul>
+			<select>
+					<option>Option 1</option>
+					<option>Option 1</option>
+					<option>Option 1</option>
+				</select>
+		</section>
+
+</main>
+
+<footer>
+
+</footer>
+
+
+</body>
+
+
+</html>
+
+
+
+<!--
+
+	<h1 class="text-section-title">Schedule</h1>
+		<div class="month">
+		  <ul>
+		    <li class="prev">&#10094;</li>
+		    <li class="next">&#10095;</li>
+		    <li>August<br><span style="font-size:18px">2017</span></li>
+		  </ul>
+		</div>
+
+		<ul class="weekdays">
+		  <li>Mo</li>
+		  <li>Tu</li>
+		  <li>We</li>
+		  <li>Th</li>
+		  <li>Fr</li>
+		  <li>Sa</li>
+		  <li>Su</li>
+		</ul>
+
+		<ul class="days">
+		  <li>1</li>
+		  <li>2</li>
+		  <li>3</li>
+		  <li>4</li>
+		  <li>5</li>
+		  <li>6</li>
+		  <li>7</li>
+		  <li>8</li>
+		  <li>9</li>
+		  <li><span class="active">10</span></li>
+		  <li>11</li>
+		  <li>12</li>
+		  <li>13</li>
+		  <li>14</li>
+		  <li>15</li>
+		  <li>16</li>
+		  <li>17</li>
+		  <li>18</li>
+		  <li>19</li>
+		  <li>20</li>
+		  <li>21</li>
+		  <li>22</li>
+		  <li>23</li>
+		  <li>24</li>
+		  <li>25</li>
+		  <li>26</li>
+		  <li>27</li>
+		  <li>28</li>
+		</ul>
+
+		-->
