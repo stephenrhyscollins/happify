@@ -4,16 +4,16 @@ const passsportSetup = require('./config/passport-authentication');
 const dashboardController = require('./controllers/webapp/dashboard');
 const authController = require('./controllers/api/auth');
 const mongoose = require('mongoose');
-var credentials;
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+var credentials;
 
 
 if(process.env.MODE=="dev"){
   credentials = require('./config/credentials');
 }else{
   credentials = {
-    COOKIE : {key:process.env.COOKIE_KEY}
+    COOKIE : {key: [process.env.COOKIE_KEY]}
   }
 }
 app.use(cookieSession({

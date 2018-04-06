@@ -13,7 +13,6 @@ if(process.env.MODE=="dev"){
   credentials = {
     MONGODB : {
       dbURI :"mongodb://webserver:" +  process.env.MONGODB_URI + ".mlab.com:29939/happify"
-  }
     },
     GOOGLE : {
       clientID: (process.env.GOOGLE_CLIENTID + ".apps.googleusercontent.com"),
