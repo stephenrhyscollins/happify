@@ -4,7 +4,7 @@ const MONGODB = {
 }
 
 const COOKIE = {
-    key : ["key1test", "key2test"]
+    key : ["p37TuQw2T8"]
 }
 
 const GOOGLE = {

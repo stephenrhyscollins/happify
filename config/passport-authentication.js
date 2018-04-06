@@ -3,13 +3,13 @@ const GoogleStrategy = require('passport-google-oauth20');
 const FacebookStrategy = require('passport-facebook');
 const User = require('../models/user');
 const cookieSession = require('cookie-session');
-var credentials = require('../config/credentials.js')
+var credentials;
 
 
+console.log(process.env.MODE);
 
-  console.log(process.env.MODE);
-if(credentials){
-  console.log("dev")
+if(process.env.MODE=="dev"){
+  credentials = require('../config/credentials.js');
 }else{
   credentials = {
     MONGODB : {
