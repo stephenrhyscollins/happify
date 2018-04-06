@@ -4,11 +4,21 @@ const passsportSetup = require('./config/passport-authentication');
 const dashboardController = require('./controllers/webapp/dashboard');
 const authController = require('./controllers/api/auth');
 const mongoose = require('mongoose');
-const credentials = require('./config/credentials');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+var credentials;
 
 
+if(process.env.MODE=="dev"){
+  credentials = require('./config/credentials');
+}else{
+  credentials = {
+    COOKIE : {key: [process.env.COOKIE_KEY]},
+    MONGODB : {
+      dbURI :"mongodb://webserver:" +  process.env.MONGODB_URI + ".mlab.com:29939/happify"
+    }
+  }
+}
 app.use(cookieSession({
   //1 day in ms
   maxAge: 24 * 60 * 60 * 1000,

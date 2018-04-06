@@ -1,11 +1,27 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
-FacebookStrategy = require('passport-facebook');
-const credentials = require('./credentials.js');
+const FacebookStrategy = require('passport-facebook');
 const User = require('../models/user');
 const cookieSession = require('cookie-session');
+var credentials;
 
 
+
+if(process.env.MODE=="dev"){
+  credentials = require('../config/credentials.js');
+}else{
+  credentials = {
+    MONGODB : {
+      dbURI :"mongodb://webserver:" +  process.env.MONGODB_URI + ".mlab.com:29939/happify"
+    },
+    GOOGLE : {
+      clientID: (process.env.GOOGLE_CLIENTID + ".apps.googleusercontent.com"),
+      clientSecret: process.env.GOOGLE_CLIENTSECRET,
+      callbackURL : process.env.GOOGLE_CALLBACKURI || '/auth/google/redirect'
+    }
+  }
+}
+console.log(credentials);
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
