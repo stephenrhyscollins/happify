@@ -13,7 +13,10 @@ if(process.env.MODE=="dev"){
   credentials = require('./config/credentials');
 }else{
   credentials = {
-    COOKIE : {key: [process.env.COOKIE_KEY]}
+    COOKIE : {key: [process.env.COOKIE_KEY]},
+    MONGODB : {
+      dbURI :"mongodb://webserver:" +  process.env.MONGODB_URI + ".mlab.com:29939/happify"
+    }
   }
 }
 app.use(cookieSession({
