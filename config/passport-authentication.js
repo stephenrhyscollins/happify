@@ -21,7 +21,6 @@ if(process.env.MODE=="dev"){
     }
   }
 }
-console.log(credentials);
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
