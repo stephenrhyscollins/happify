@@ -6,7 +6,6 @@ const cookieSession = require('cookie-session');
 var credentials;
 
 
-console.log(process.env.MODE);
 
 if(process.env.MODE=="dev"){
   credentials = require('../config/credentials.js');
@@ -16,9 +15,9 @@ if(process.env.MODE=="dev"){
       dbURI : process.env.MONGODB_URI
     },
     GOOGLE : {
-      clientID: process.env.GOOGLE_CLIENTID,
+      clientID: (process.env.GOOGLE_CLIENTID + ".apps.googleusercontent.com"),
       clientSecret: process.env.GOOGLE_CLIENTSECRET,
-      callbackURL : process.env.GOOGLE_CALLBACKURI
+      callbackURL : process.env.GOOGLE_CALLBACKURI || '/auth/google/redirect'
     }
   }
 }
