@@ -1,11 +1,28 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
-FacebookStrategy = require('passport-facebook');
-const credentials = require('./credentials.js');
+const FacebookStrategy = require('passport-facebook');
 const User = require('../models/user');
 const cookieSession = require('cookie-session');
+var credentials = require('../config/credentials.js')
 
 
+
+  console.log(process.env.MODE);
+if(credentials){
+  console.log("dev")
+}else{
+  credentials = {
+    MONGODB : {
+      dbURI : process.env.MONGODB_URI
+    },
+    GOOGLE : {
+      clientID: process.env.GOOGLE_CLIENTID,
+      clientSecret: process.env.GOOGLE_CLIENTSECRET,
+      callbackURL : process.env.GOOGLE_CALLBACKURI
+    }
+  }
+}
+console.log(credentials);
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
