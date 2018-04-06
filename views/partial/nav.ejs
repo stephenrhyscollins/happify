@@ -1,0 +1,40 @@
+<!--views/partial/nav.ejs-->
+<aside id="left" class="bg-dark-grey sidebar">
+  <div id="title">
+    <img src="/assets/images/png/logo.png"/>
+    <h1 class="text-title">Happify</h1>
+
+  </div>
+
+
+
+  <div class="container">
+    <div class="content">
+      <p>Good morning <%=user.name.givenName%>, how are you feeling?</p>
+
+      <hr/>
+      <ul>
+        <li><a href='#'>Track</a></li>
+        <li class="selected" onclick="javascript:loadPlan()"><a href='#'>Plan</a></li>
+        <li><a href='#'>Progress</a></li>
+        <li><a href='#'>Settings</a></li>
+      </ul>
+    </div>
+
+  <div id="user">
+    <div class ="flex-horizontal-center group-together-horizontal">
+      <div id="profile-image" class="img-frame">
+        <img src="<%=user.profileImage %>"/>
+      </div>
+      <p><%=user.name.givenName + " " + user.name.familyName%></p>
+    </div>
+
+    <div id="arrow">&#65088;</div>
+    <!--div id="user-hidden" class="hidden">
+
+    <a href="/auth/signout">Sign out</a>
+  </div-->
+</div>
+
+    </div>
+</aside>

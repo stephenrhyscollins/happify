@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const passsportSetup = require('./config/passport-authentication');
 const dashboardController = require('./controllers/webapp/dashboard');
+const activitiesController = require('./controllers/webapp/activities');
 const authController = require('./controllers/api/auth');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
@@ -29,10 +30,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 //Set routing paths
 app.use('/dashboard', dashboardController);
+app.use('/activities', activitiesController);
 //Set routing paths
 app.use('/auth', authController);
 //Use default express middleware to handle retrieving static files
 app.use('/assets', express.static('assets'));
+
 
 app.set('view engine', 'ejs');
 

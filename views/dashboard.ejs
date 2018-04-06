@@ -13,34 +13,18 @@
 <body class="bg-light-grey">
 
 <main>
-	<aside id="profile" class="bg-dark-grey">
-		<h1 class="text-title">Happify</h1>
-		<h2><%=m%></h2>
-		<hr/>
-		<div class = "flex-vertical-center group-together-vertical">
-			<div class="img-frame">
-				<img src="<%=user.profileImage %>"/>
-			</div>
-			<p><%=user.name.givenName + " " + user.name.familyName%></p>
-			<a href="/auth/signout">Sign out</a>
-		</div>
+	<% include partial/nav %>
 
-		<hr/>
+	<section id="container">
 
-		<ul>
-			<li><a href='#'>Planner</a></li>
-			<li><a href='#'>Progress</a></li>
-			<li><a href='#'>Settings</a></li>
-		</ul>
-	</aside>
 
-	<section id="content">
-		<h2 class="text-section-title">My schedule</h2>
-		<table id="planner">
-			<!--populate with js-->
-		</table>
+
 	</section>
-	<section id="side" class="bg-dark-grey">
+
+
+
+
+	<!--section id="side" class="bg-dark-grey">
 			<h1>Suggested activities</h1>
 			<ul>
 
@@ -91,7 +75,7 @@
 					<option>Option 1</option>
 					<option>Option 1</option>
 				</select>
-		</section>
+		</section-->
 
 </main>
 
@@ -107,8 +91,8 @@
 
 
 
-<!--
 
+<!--
 	<h1 class="text-section-title">Schedule</h1>
 		<div class="month">
 		  <ul>

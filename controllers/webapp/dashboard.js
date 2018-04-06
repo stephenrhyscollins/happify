@@ -7,7 +7,7 @@ const authCheck = (req, res, next) => {
     res.redirect('/');
   };
 router.get('/', authCheck, (req, res) => {
-  res.render('dashboard', {user : req.user, m : "ENV: "+process.env.MODE});
+  res.render('dashboard', {user : req.user, m : process.env.MODE});
 });
 
 
