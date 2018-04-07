@@ -189,7 +189,8 @@ main #container{
 main #container .content{
 	flex-grow: 1;
 	display: flex;
-	flex-wrap: WRAP;
+	flex-wrap: wrap;
+	overflow: auto;
 }
 
 
