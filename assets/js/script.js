@@ -1,14 +1,25 @@
 
-var content;
-var suggested;
+var container, nav;
 
 
 var days =["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"]
 
 
+function loadPartial(e){
+    if(e.target != e.currentTarget){
+			populateContent(e.target.id, container, $(e.target), true);
+      document.title = "Happify | " + e.target.id;
+    }
+	}
 
-function retrieveView(view){
-	const container = $('#container');
+	function changeSelectedTab(selectedTab){
+		var nav = $("#nav");
+		selectedTab.parent().find(".selected").removeClass("selected");
+		selectedTab.addClass('selected');}
+
+
+
+function populateContent(view, container, selectedTab, push){
 	$.ajax({
 		 type: "GET",
 		 url: '/activities/' + view,
@@ -16,20 +27,40 @@ function retrieveView(view){
 		 success: function(data){
       if (data){
           container.html(data);
+					if(push){history.pushState(view, null, '#'+view);};
+					changeSelectedTab(selectedTab);
       }
 		}
 	});
 }
 
 
+window.onpopstate = function(e){
+	if(e.state){
+		refreshState(e.state);
+	}
+};
+
+function refreshState(state){
+		populateContent(state, $('#container'), nav.find('#'+state), false);
+}
+
 
 
 $(document).ready(function(){
+	container = $('#container');
+	nav = $('#nav');
+	var url = String(document.location);
+	url = url.split("#");
+	if(url.length > 1 && url[1].length > 0){populateContent(url[1], container, nav.find('#'+url[1]));};
+
 	suggested = $( ".suggested" ).draggable({
 		helper:'clone'
 	});
 
-	content = $('.content');
+	$('#nav').click(loadPartial);
+
+
 	//drawCalendar();
 });
 
@@ -65,10 +96,6 @@ function drawCalendar(date){
 
 };
 
-function loadPlan(){
-	updateURL("/plan","Happify | Plan");
-	retrieveView('plan')
-}
 
 function configureDragDrop(){
 	var content = $('#content');
@@ -87,12 +114,12 @@ function configureDragDrop(){
 
 function updateURL(url, title){
 	if (history.pushState) {
+
+			console.log('pushstate');
   	window.history.pushState("", title, url);
 	} else {
+		console.log('document location');
 	  document.location.href = "/"+url;
 		document.title = title;
 	}
 }
-
-$(document).ready(function() {
-});
