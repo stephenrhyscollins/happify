@@ -7,7 +7,7 @@ var credentials;
 
 
 
-if(process.env.MODE=="dev"){
+if(!process.env.MODE){
   credentials = require('../config/credentials.js');
 }else{
   credentials = {
