@@ -10,7 +10,7 @@ const passport = require('passport');
 var credentials;
 
 
-if(process.env.MODE=="dev"){
+if(!process.env.MODE){
   credentials = require('./config/credentials');
 }else{
   credentials = {
@@ -48,11 +48,10 @@ app.get('/', (req, res, next) => {
 //initialise passport
 
 //connect to MONGODB
-mongoose.connect(
-  credentials.MONGODB.dbURI,
-  ()=> {
-    console.log("connected");
-  }
-);
+mongoose.connect(credentials.MONGODB.dbURI, function(){
+  console.log("connected");
+}).catch(function(e){
+  console.log(e);
+});
 
 module.exports = app;
