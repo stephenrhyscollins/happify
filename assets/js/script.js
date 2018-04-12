@@ -15,7 +15,11 @@ function loadPartial(e){
 	function changeSelectedTab(selectedTab){
 		var nav = $("#nav");
 		selectedTab.parent().find(".selected").removeClass("selected");
-		selectedTab.addClass('selected');}
+		selectedTab.addClass('selected');
+    if($(window).width() < 750){
+
+    }
+  }
 
 
 
@@ -42,13 +46,13 @@ window.onpopstate = function(e){
 };
 
 function refreshState(state){
-		populateContent(state, $('#container'), nav.find('#'+state), false);
+		populateContent(state, $('main'), nav.find('#'+state), false);
 }
 
 
 
 $(document).ready(function(){
-	container = $('#container');
+	container = $('main');
 	nav = $('#nav');
 	var url = String(document.location);
 	url = url.split("#");
@@ -58,11 +62,25 @@ $(document).ready(function(){
 		helper:'clone'
 	});
 
-	$('#nav').click(loadPartial);
-
-
-	//drawCalendar();
+  	$('#nav').click(loadPartial);
+    $('#title').click(toggleMenu);
 });
+function toggleMenu(){
+  var menu = $('#left');
+  var content = $('main');
+  if(menu.hasClass('.hidden'))
+  {
+      menu.animate({"margin-left": '+='+menu.width()});
+      menu.removeClass('.hidden');
+      content.animate({"margin-left": '+='+menu.width()});
+  }
+  else
+  {
+      menu.animate({"margin-left": '-='+menu.width()});
+      menu.addClass('.hidden');
+      $('main').animate({"margin-left": '-='+menu.width()});
+  }
+};
 
 $.fn.isInViewport = function() {
   var elementTop = $(this).offset().top;
@@ -80,7 +98,7 @@ function drawCalendar(date){
 
 	for(var d=0; d<7; d++){
 		htmlText += '<td>' + days[d] + '</td>';
-	}
+	};
 
 	htmlText += "</tr>";
 
@@ -109,7 +127,7 @@ function configureDragDrop(){
 	}
 	);
 	content.find('#planner').append("");
-}
+};
 
 
 function updateURL(url, title){
@@ -122,4 +140,4 @@ function updateURL(url, title){
 	  document.location.href = "/"+url;
 		document.title = title;
 	}
-}
+};

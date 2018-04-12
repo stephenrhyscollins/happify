@@ -50,7 +50,7 @@ a{
   -moz-transition:    all 0.15s ease;
   -ms-transition:     all 0.15s ease;
   -o-transition:      all 0.15s ease;
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 
@@ -139,8 +139,18 @@ body{
 
 #profile-image{
     width: 50px;
-    height: 50px;
-		flex-shrink: 0;
+    /* height: 50px; */
+    margin: 5%;
+    flex-shrink: 0;
+    position: relative;
+    width: 40%;
+		max-width: 5em;
+}
+
+#profile-image:after{
+	content:"";
+	display: block;
+	padding-bottom: 100%;
 }
 
 .img-frame {
@@ -154,6 +164,9 @@ body{
 .img-frame > img {
     height: inherit;
     margin: 0 auto;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -172,16 +185,13 @@ body{
 }
 
 main{
-	height: 100%;
-	/* box-shadow: 4px 0 6px rgba(0,0,0,.3); */
-	z-index: 2;
-}
-
-main > #container{
 	height: inherit;
 	margin-left: 10vw;
-	z-index:  0;
+	z-index: 2;
+	width: inherit;
+	overflow: auto;
 }
+
 
 
 .card .detail{
@@ -220,9 +230,12 @@ main > #container{
 
 
  @media (max-width: 750px){
- 	aside.sidebar {
- 		max-width: 30px;
+ 	aside#left, header > #title{
+ 		width: 40vw!important;
  	}
+	main{
+		margin-left: 40vw;
+	}
  }
 
 
@@ -242,13 +255,34 @@ main > #container{
 	justify-content: space-around;
 	box-sizing: border-box;
 }
-
-#user{
+#user-wrapper{
 	background: rgba(150, 170, 200, 0.5);
 	padding: 5px;
 	color: #ddd;
 	font-weight: bold;
+	text-align: center;
+}
+
+.flex-column{
+	display: flex;
+	flex-direction: column;
+}
+
+.flex-column > *{
+	margin: 3px 0;
+}
+
+#user-wrapper > *{
+	margin: 5px;
+}
+
+#user{
+	display: flex;
 	border-radius: 5px;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	word-wrap: break-word;
 }
 
 #app:hover > #environment{
@@ -261,7 +295,7 @@ main > #container{
 
 
 aside.sidebar > .container{
-	height: 100vh;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
@@ -273,12 +307,19 @@ aside.sidebar > .container{
 }
 
 aside.sidebar > .container > .content{
-	padding: 1vw;
+	padding: 1em;
 }
 
 
+.hide{
+	opacity: 0;
+	margin-left: -40vw!important;
+}
 
-
+#wrapper{
+	display: inline-block;
+	height: 92vh;
+}
 
 #left li > *{
 	letter-spacing: 1px;
@@ -314,7 +355,7 @@ aside.sidebar > .container > .content{
 
 
 aside.sidebar {
-	height: 100vh;
+	height: inherit;
 	position: fixed;
 	display: block;
 }
@@ -342,9 +383,7 @@ aside .sidebar ul li:hover,.selected{
 }
 
 aside#left{
-	float: left;
-	display: flex;
-	flex-direction: column;
+	position: fixed;
 	box-shadow: inset -4px 0px 6px rgba(0,0,0,.3);
 	float: left;
 	max-width: 200px;
@@ -360,13 +399,13 @@ aside#left, header > #title{
 #title{
 	display: inline-flex;
 	background-color: #3990a9;
-	justify-content: space-evenly;
+	justify-content: baseline;
 	align-items: center;
 	flex-shrink: 0;
 	flex-grow: 0;
 }
 #title img{
-	height: 50px;
+	height: 40px;
 }
 #title h1{
 	margin: 0;
@@ -398,8 +437,9 @@ aside#left, header > #title{
 }
 
 
-body > *{
-		padding-top: 8vh;
+body > #wrapper{
+		margin-top: 8vh;
+		width: 100vw;
 }
 
 
@@ -407,15 +447,15 @@ body > *{
 header{
 	height: 8vh;
 	box-shadow: 0 4px 6px rgba(0,0,0,.3);
-	width: 100%;
+	width: 100vw;
 	z-index:100;
 	padding: 0;
 	position: fixed;
 	display: flex;
 	color: #efefef;
 	background-color: #3990a9;
-  justify-content: space-between;
-  align-items: center;
+	justify-content: space-between;
+	align-items: center;
 }
 
 header > *{

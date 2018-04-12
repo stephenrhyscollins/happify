@@ -20,19 +20,23 @@
       </ul>
     </div>
 
-  <div id="user">
-    <div class ="flex-horizontal-center group-together-horizontal">
-      <div id="profile-image" class="img-frame">
+  <div id="user-wrapper">
+    <div id="user">
+    <div id="profile-image" class="img-frame">
         <img src="<%=user.profileImage %>"/>
       </div>
-      <p><%=user.name.givenName + " " + user.name.familyName%></p>
+      <div class="flex-column">
+        <span><%=user.name.givenName%></span>
+        <span><%=user.name.familyName%></span>
+      </div>
     </div>
 
-    <div id="arrow">&#65088;</div>
+    <!--div id="arrow">&#65088;</div>
     <!--div id="user-hidden" class="hidden">
 
     <a href="/auth/signout">Sign out</a>
   </div-->
+  <a href="/auth/signout">Sign out</a>
 </div>
 
     </div>
