@@ -60,6 +60,10 @@ body{
 	font-family: roboto, sans-serif;
 }
 
+body, html{
+	height: 100%;
+}
+
 
 .rounded{
 	border-radius: 2px;
@@ -184,12 +188,10 @@ body{
 }
 
 main{
-	height: inherit;
 	margin-left: 10vw;
 	/*right: -10vw;*/
 	z-index: -1;
 	width: inherit;
-	overflow: auto;
 }
 
 
@@ -229,7 +231,7 @@ main{
 }
 
 
- @media (max-width: 750px){
+ @media (max-width: 1000px){
  	aside#left, header > #title{
  		width: 40vw!important;
  	}
@@ -323,9 +325,7 @@ aside.sidebar > .container > .content{
 
 #wrapper{
 	display: inline-block;
-	height: 90vh;
-	overflow: hidden;
-	position:  fixed;
+	overflow: overlay;
 }
 
 #left li > *{
@@ -401,7 +401,6 @@ aside#left{
 	box-shadow: inset -4px 0px 6px rgba(0,0,0,.3);
 	/* float: left; */
 	/* max-width: 200px; */
-	flex-basis: 90vh;
 	/* min-width: 100px; */
 	background-color: #566072;
 	overflow: auto;
@@ -409,7 +408,6 @@ aside#left{
 }
 
 aside#left, header > #title{
-	height: 10vh;
 }
 
 
@@ -452,8 +450,12 @@ aside#left, header > #title{
 
 
 body > #wrapper{
-		padding-top: 10vh;
-		width: 100vw;
+		top: 10vh;
+		bottom:0;
+		left:0;
+		right:0;
+		position: fixed;
+
 }
 
 

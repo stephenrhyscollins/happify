@@ -54,6 +54,7 @@ function refreshState(state){
 $(document).ready(function(){
 	container = $('main');
 	nav = $('#nav');
+  resize();
 
 	var url = String(document.location);
 	url = url.split("#");
@@ -65,11 +66,37 @@ $(document).ready(function(){
 
   	$('#nav').click(loadPartial);
     $('#title').click(toggleMenu);
+
+
+
+
+
 });
 function toggleMenu(){
   $('main').toggleClass('full');
   $('#left').toggleClass('hidden');
 };
+
+function resize() {
+  var wrapper = $('#wrapper');
+  var window = $('window');
+
+  wrapper.height(screen.height);
+  $('body').height(screen.height);
+  var console = document.getElementById('title');
+  $('main').innerHTML = "*Resize! window.innerHeight: " + window.innerHeight + ",  documentElement.clientHeight: " + document.documentElement.clientHeight + "<br>";
+
+  /*var fullscreen = false;
+    document.documentElement.addEventListener("click", function() {
+      if (fullscreen)
+        document.webkitExitFullscreen();
+      else
+        document.documentElement.webkitRequestFullscreen();
+
+      fullscreen = !fullscreen;
+    });*/
+
+}
 
 
 
