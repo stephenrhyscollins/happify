@@ -85,7 +85,7 @@ function resize() {
     wrapper.height((window.innerHeight-$('header').height()));
     $('body').height(window.innerHeight);
     wrapper.children().height((window.innerHeight-$('header').height()));
-  ;} , 10);
+  ;} , 100);
 };
   /*var fullscreen = false;
     document.documentElement.addEventListener("click", function() {
