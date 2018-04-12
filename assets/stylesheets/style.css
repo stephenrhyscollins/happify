@@ -323,7 +323,6 @@ aside.sidebar > .container > .content{
 
 #wrapper{
 	display: inline-block;
-	overflow: overlay;
 }
 
 #left li > *{
@@ -367,7 +366,6 @@ aside.sidebar > .container > .content{
 aside.sidebar {
 	position: fixed;
 	display: block;
-	width:  10vw;
 	/* height: 116vh; */
 }
 
@@ -405,13 +403,18 @@ aside#left{
 }
 
 aside#left, header > #title{
+	width: 10vw!important;
 }
 
-
+#menu_button {
+    display: inline-block;
+    cursor: pointer;
+		margin: 5px;
+}
 #title{
 	display: inline-flex;
 	background-color: #3990a9;
-	justify-content: baseline;
+	justify-content: space-around;
 	align-items: center;
 	flex-shrink: 0;
 	flex-grow: 0;
@@ -506,18 +509,24 @@ nav input[type=text]{
 	width: 300px;
 }
 
-input::-webkit-input-placeholder {
-	color: #fff !important;
+
+
+.bar1, .bar2, .bar3 {
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    margin: 6px 0;
+    transition: 0.4s;
 }
- 
-input:-moz-placeholder { /* Firefox 18-
-	color: #fff !important; 
+
+.icon-change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-8px, 4px);
+    transform: rotate(-45deg) translate(-8px, 4px);
 }
- 
-input::-moz-placeholder {  /* Firefox 19+
-	color: #fff !important; 
-}
- 
-input:-ms-input-placeholder { 
-	color: #fff !important; 
+
+.icon-change .bar2 {opacity: 0;}
+
+.icon-change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -5px);
+		transform: rotate(45deg) translate(-8px, -5px);
 }
