@@ -54,6 +54,7 @@ function refreshState(state){
 $(document).ready(function(){
 	container = $('main');
 	nav = $('#nav');
+
 	var url = String(document.location);
 	url = url.split("#");
 	if(url.length > 1 && url[1].length > 0){populateContent(url[1], container, nav.find('#'+url[1]));};
@@ -66,21 +67,11 @@ $(document).ready(function(){
     $('#title').click(toggleMenu);
 });
 function toggleMenu(){
-  var menu = $('#left');
-  var content = $('main');
-  if(menu.hasClass('.hidden'))
-  {
-      menu.animate({"margin-left": '+='+menu.width()});
-      menu.removeClass('.hidden');
-      content.animate({"margin-left": '+='+menu.width()});
-  }
-  else
-  {
-      menu.animate({"margin-left": '-='+menu.width()});
-      menu.addClass('.hidden');
-      $('main').animate({"margin-left": '-='+menu.width()});
-  }
+  $('main').toggleClass('full');
+  $('#left').toggleClass('hidden');
 };
+
+
 
 $.fn.isInViewport = function() {
   var elementTop = $(this).offset().top;
