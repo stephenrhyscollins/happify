@@ -75,6 +75,7 @@ $(document).ready(function(){
 function toggleMenu(){
   $('main').toggleClass('full');
   $('#left').toggleClass('hidden');
+  $('#menu_button').toggleClass('icon-change');
 };
 
 function resize() {
@@ -84,8 +85,7 @@ function resize() {
     wrapper.height((window.innerHeight-$('header').height()));
     $('body').height(window.innerHeight);
     wrapper.children().height((window.innerHeight-$('header').height()));
-    $('main').text("window.innerHeight: " + window.innerHeight + " documentElement.clientHeight: " + document.documentElement.clientHeight + "<br>");
-  ;} , 100);
+  ;} , 10);
 };
   /*var fullscreen = false;
     document.documentElement.addEventListener("click", function() {
