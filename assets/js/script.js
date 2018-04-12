@@ -10,7 +10,7 @@ function loadPartial(e){
 			populateContent(e.target.id, container, $(e.target), true);
       document.title = "Happify | " + e.target.id;
     }
-	}
+	};
 
 	function changeSelectedTab(selectedTab){
 		var nav = $("#nav");
@@ -19,7 +19,7 @@ function loadPartial(e){
     if($(window).width() < 750){
 
     }
-  }
+  };
 
 
 
@@ -36,7 +36,7 @@ function populateContent(view, container, selectedTab, push){
       }
 		}
 	});
-}
+};
 
 
 window.onpopstate = function(e){
@@ -47,7 +47,7 @@ window.onpopstate = function(e){
 
 function refreshState(state){
 		populateContent(state, $('main'), nav.find('#'+state), false);
-}
+};
 
 
 
@@ -78,14 +78,15 @@ function toggleMenu(){
 };
 
 function resize() {
-  var wrapper = $('#wrapper');
-  var window = $('window');
-
-  wrapper.height(screen.height);
-  $('body').height(screen.height);
-  var console = document.getElementById('title');
-  $('main').innerHTML = "*Resize! window.innerHeight: " + window.innerHeight + ",  documentElement.clientHeight: " + document.documentElement.clientHeight + "<br>";
-
+  setTimeout(function(){
+    var wrapper = $('#wrapper');
+    console.log((window.innerHeight-$('header').height()));
+    wrapper.height((window.innerHeight-$('header').height()));
+    $('body').height(window.innerHeight);
+    wrapper.children().height((window.innerHeight-$('header').height()));
+    $('main').text("window.innerHeight: " + window.innerHeight + " documentElement.clientHeight: " + document.documentElement.clientHeight + "<br>");
+  ;} , 100);
+};
   /*var fullscreen = false;
     document.documentElement.addEventListener("click", function() {
       if (fullscreen)
@@ -96,11 +97,11 @@ function resize() {
       fullscreen = !fullscreen;
     });*/
 
-}
 
 
 
-$.fn.isInViewport = function() {
+
+/*$.fn.isInViewport = function() {
   var elementTop = $(this).offset().top;
   var elementBottom = elementTop + $(this).outerHeight();x
 
@@ -108,7 +109,7 @@ $.fn.isInViewport = function() {
   var viewportBottom = viewportTop + $(window).height();
 
   return elementBottom > viewportTop && elementTop < viewportBottom;
-};
+};*/
 
 function drawCalendar(date){
 	/*build table data here todo*/

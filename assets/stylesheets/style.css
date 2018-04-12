@@ -298,14 +298,12 @@ main{
 
 
 aside.sidebar > .container{
-	min-height: inherit;
-	height: 90vh;
+	height: inherit;
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
 	flex-shrink: 1;
 	justify-content: space-between;
-	flex-basis: 90vh;
 	/*background: linear-gradient(to bottom left, #3884c1, #5c8bb1);	box-shadow: 0 4px 6px rgba(0,0,0,.3);*/
 	color: #eee;
 	overflow: auto;
@@ -369,7 +367,6 @@ aside.sidebar > .container > .content{
 aside.sidebar {
 	position: fixed;
 	display: block;
-	min-height: 90vh;
 	width:  10vw;
 	/* height: 116vh; */
 }
@@ -421,6 +418,9 @@ aside#left, header > #title{
 }
 #title img{
 	height: 40px;
+}
+#title h2{
+	margin:0;
 }
 
 #datebar{
