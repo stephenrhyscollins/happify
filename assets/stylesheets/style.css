@@ -283,7 +283,7 @@ main{
 	display: block;
 	padding: 15px 20px;
 	background: #dc3545;
-	flex-grow: 0;
+	flex-grow: 1;
 	flex-shrink: 0;
 	/* justify-self: auto; */
 }
@@ -330,11 +330,10 @@ aside.sidebar > .container{
 	overflow: auto;
 }
 
-aside.sidebar > .container > .content{
-	padding: 1em;
-	/* height: inherit; */
-	box-sizing: content-box;
+aside.sidebar > .container > .content > *:not(ul){
+		margin: 1em;
 }
+
 
 
 .hide{
@@ -398,18 +397,18 @@ aside.sidebar h1{
 aside.sidebar ul{
 	list-style: none;
 	padding: 0;
+	margin: 0;
 }
 
 aside.sidebar ul li{
 	padding: .75em;
 	margin: 5px 0;
-	border-radius: 5px;
 	text-align: right;
 }
 
 aside .sidebar ul li:hover,.selected{
 	color: #112244;
-	background-color: #efefef;
+	background-color: #fff;
 }
 
 aside#left{
