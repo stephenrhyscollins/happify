@@ -404,6 +404,7 @@ aside.sidebar ul li{
 	padding: .75em;
 	margin: 5px 0;
 	text-align: right;
+	font-size: 1.2em;
 }
 
 aside .sidebar ul li:hover,.selected{
