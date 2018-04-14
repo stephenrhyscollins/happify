@@ -6,6 +6,7 @@ var days =["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"]
 
 
 function loadPartial(e){
+    //check the user clicked an item in the list not just the list
     if(e.target != e.currentTarget){
 			populateContent(e.target.id, container, $(e.target), true);
       document.title = "Happify | " + e.target.id;
@@ -64,7 +65,7 @@ $(document).ready(function(){
 		helper:'clone'
 	});
 
-  	$('#nav li').click(loadPartial);
+  	$('#nav').click(loadPartial);
     $('#title').click(toggleMenu);
 
 
