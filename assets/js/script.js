@@ -64,7 +64,7 @@ $(document).ready(function(){
 		helper:'clone'
 	});
 
-  	$('#nav').click(loadPartial);
+  	$('#nav li').click(loadPartial);
     $('#title').click(toggleMenu);
 
 
