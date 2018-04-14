@@ -446,7 +446,7 @@ aside#left, header > #title{
 	margin: 0 5%;
 }
 #title > *:first-child{
-	margin-left: 5vh;
+	margin-left: 3vh;
 }
 
 #datebar{
