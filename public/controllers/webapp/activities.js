@@ -1,9 +1,13 @@
 const router =  require('express').Router();
 var fs = require('fs');
+var bodyParser = require('body-parser');
+
+
 
 router.get('/track', (req, res) => {
   res.render('partial/track', {user : req.user});
 });
+
 
 router.get('/plan', (req, res) => {
   res.render('partial/plan', {user : req.user});
