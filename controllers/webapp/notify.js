@@ -30,14 +30,14 @@ webPush.setVapidDetails(
 )
 
 router.get('/', function(req, res) {
-   if(false) {
+   if(req.query.auth !="secureMe") {
        console.log("Missing or incorrect auth-secret header. Rejecting request.");
        return res.sendStatus(401);
    }
 
-   let message = req.query.message || `Willy Wonka's chocolate is the best!`;
-   let clickTarget = req.query.clickTarget || `http://www.favoritemedium.com`;
-   let title = req.query.title || `Push notification received!`;
+   let message = req.query.message;
+   let clickTarget = req.query.clickTarget;
+   let title = req.query.title;
 
    Subscription.find({}).then(function(subscriptions) {
      subscriptions.forEach(function(subscription){
