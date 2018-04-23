@@ -15,13 +15,10 @@ if(!process.env.MODE){
   credentials = require('../../config/credentials.js');
 }else{
   credentials = {
-    MONGODB : {
-      dbURI :"mongodb://webserver:" +  process.env.MONGODB_URI + ".mlab.com:29939/happify"
-    },
-    GOOGLE : {
-      clientID: (process.env.GOOGLE_CLIENTID + ".apps.googleusercontent.com"),
-      clientSecret: process.env.GOOGLE_CLIENTSECRET,
-      callbackURL : process.env.GOOGLE_CALLBACKURI || '/auth/google/redirect'
+    VAPID : {
+      subject: (process.env.VAPID_SUBJECT),
+      public: process.env.VAPID_PUBLIC,
+      private : process.env.VAPID_PRIVATE
     }
   }
 }
