@@ -189,8 +189,8 @@ body, html{
 }
 
 main{
-	margin-left: 16vw;
-	/*right: -10vw;*/
+	margin-left: 10vw;
+	/* right: -10vw; */
 	z-index: -1;
 	overflow: auto;
 	width: inherit;
@@ -243,10 +243,10 @@ main{
  }
   @media (max-width: 700px){
   	aside#left, header > #title{
-  		width: 40vw!important;
+  		/* width: 40vw!important; */
   	}
  	main{
- 		margin-left: 40vw;
+ 		/* margin-left: 40vw; */
  	}
   }
 
@@ -273,7 +273,7 @@ main{
 	color: #ddd;
 	font-weight: bold;
 	text-align: center;
-	box-shadow: -4px 0px 6px rgba(0,0,0,.3);
+	/* box-shadow: -4px 0px 6px rgba(0,0,0,.3); */
 }
 
 #user > *{
@@ -420,13 +420,13 @@ aside#left{
 	/* float: left; */
 	width: 10vw;
 	/* min-width: 305px; */
-	background-color: #566072;
+	background-color: #2b3446;
 	overflow: auto;
 	/* border-bottom: 10px solid pink; */
 }
 
 aside#left, header > #title{
-	width: 16vw;
+	/* width: 16vw; */
 }
 
 #menu_button {

@@ -30,6 +30,7 @@ webPush.setVapidDetails(
 )
 
 router.get('/', function(req, res) {
+  console.log(req.query.auth);
    if(req.query.auth !="secureMe") {
        console.log("Missing or incorrect auth-secret header. Rejecting request.");
        return res.sendStatus(401);

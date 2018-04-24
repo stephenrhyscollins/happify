@@ -153,6 +153,7 @@ function isSubscribed(reg){
     // Do we already have a push message subscription?
     reg.pushManager.getSubscription()
         .then(function (subscription) {
+					console.log("Device already subscribed");
             return(subscription);
         })
         .catch(function (err) {
