@@ -1,0 +1,62 @@
+<!-- views/partial/survey.ejs -->
+<h1><%=survey.title%></h1>
+<h3><%=survey.description%></h3>
+<span id="id" hidden><%=survey.id%></span>
+<table id="survey">
+  <tr>
+    <th></th>
+    <%for(var r=0; r < survey.responses.length; r++){ %>
+      <th><%=survey.responses[r].response%></th>
+      <%}%>
+  </tr>
+
+
+<% for(var q=0; q < survey.questions.length; q++) { %>
+   <tr>
+     <td class="question"><%=survey.questions[q] %></td>
+     <%for(var r=0; r < survey.responses.length; r++){ %>
+       <td><input type="radio" name="<%=q%>" checked value="<%=survey.responses[r].value%>"></td>
+     <%}%>
+   </tr>
+<% } %>
+
+
+<script>
+function submit(){
+  var result = score();
+  if(result){
+    $.ajax({
+        type: 'POST',
+        url: '/activities/survey/submit',
+        data: {
+          surveyId: "<%=survey.id%>",
+          responses: result.responses,
+          score : result.score
+        },
+				dataType: 'application/json',
+        success: function (response) {
+            console.log('Survey complete ' + JSON.stringify(response));
+        }
+    });
+  }else{
+    alert("Please complete the assessment");
+  }
+}
+
+function score(){
+  var score = Number(0);
+  var response;
+  var responses = [];
+  $('#survey tr').each(function(index, element){
+      response = $('input[name='+index+']:checked').val();
+      if(response){
+        responses[index] = response;
+        score+=Number(response);
+      }else{
+        return false;
+      };
+  });
+  return {score : score, responses : responses};
+}
+
+</script>

@@ -43,6 +43,7 @@ function loadPartial(e){
     if(e.target != e.currentTarget){
 			populateContent(e.target.id, container, $(e.target), true);
       document.title = "Happify | " + e.target.id;
+		  $('main').attr('id', e.target.id);
     }
 	}
 
@@ -67,6 +68,8 @@ function populateContent(view, container, selectedTab, push){
           container.html(data);
 					if(push){history.pushState(view, null, '#'+view);}
 					changeSelectedTab(selectedTab);
+		      document.title = "Happify | " + view;
+				  $('main').attr('id', view);
       }
 		}
 	});
@@ -96,10 +99,10 @@ function toggleMenu(){
 function resize() {
   setTimeout(function(){
     var wrapper = $('#wrapper');
+		$('body').height(window.innerHeight);
     console.log((window.innerHeight-$('header').height()));
     wrapper.height((window.innerHeight-$('header').height()));
-    $('body').height(window.innerHeight);
-    wrapper.children().height((window.innerHeight-$('header').height()));
+    $('#left').height((window.innerHeight-$('header').height()));
   } , 100);
 }
 

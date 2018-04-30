@@ -51,7 +51,7 @@ a{
   -ms-transition:     all 0.15s ease;
   -o-transition:      all 0.15s ease;
   box-sizing: border-box;
-	-webkit-tap-highlight: rgba(0,0,0,0);
+  -webkit-tap-highlight: rgba(0,0,0,0);
 }
 
 
@@ -70,6 +70,17 @@ body, html{
 	border-radius: 2px;
 }
 
+.padding{
+	padding: 10px;
+}
+
+.list-flex-column > li{
+	display: flex;
+	flex-direction:  column;
+	align-items: center;
+	margin-top: 0px;
+	justify-content: center;
+}
 /*Landing page*/
 
 #landing-page{
@@ -127,6 +138,63 @@ body, html{
 }
 
 
+/*homepage*/
+div.wide{
+	list-style: none;
+	-webkit-margin-after:	0;
+	-webkit-margin-before: 0;
+	-webkit-margin-end:	0;
+	-webkit-margin-start:	0;
+	-webkit-padding-start: 0;
+}
+
+div.wide img{
+	height: inherit;
+}
+
+
+
+form > #courses{
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+#courses > *{
+	flex-basis: 243px;
+	/* flex-grow: 1; */
+	flex-shrink: 1;
+	height: 10vh;
+	display: block;
+	box-shadow: 0px 1px 7px 1px rgba(0,0,0,.3);
+	justify-content: flex-start;
+	align-items: center;
+	margin: 10px;
+}
+
+span#depression{
+	background: #00BCD4;
+	background-color: red;
+	background: red url('/assets/images/icons/depression.png') no-repeat top left;
+}
+span#anxiety{
+	background: #EF5350;
+}
+span#self-esteem{
+	background: #61a061;
+}
+
+main#home{
+	width: 60%;
+
+}
+main#survey{
+	width: 60%;
+
+}
+main#home{
+
+}
 
 .flex-vertical-center{
     display: flex;
@@ -189,11 +257,15 @@ body, html{
 }
 
 main{
-	margin-left: 10vw;
-	/* right: -10vw; */
+  margin: 0 auto;
+  padding: 1% 5%;
+	height: 100%;
 	z-index: -1;
 	overflow: auto;
-	width: inherit;
+	box-sizing:  border-box;
+	width: 100%;
+	box-shadow: 0px 1px 11px 1px rgba(0,0,0,.3);
+	background: white;
 }
 
 
@@ -207,8 +279,10 @@ main{
 	text-align: center;
 }
 
-.card h1{
+.card h1, .card h2, .card h3{
 	margin:0;
+	font-weight: inherit;
+	/* font-size: 100%; */
 }
 
 .card .detail img.icon{
@@ -218,7 +292,7 @@ main{
 
 
 .card{
-	width: 100%;
+	max-width: inherit;
 	flex-basis: 200px;
 	flex-grow: 1;
 	display: flex;
@@ -226,8 +300,7 @@ main{
 	justify-content: space-between;
 	background-color: #fff;
 	/* box-shadow: 0 4px 6px rgba(0,0,0,.3); */
-	padding: 20px;
-	margin: 10px;
+	margin: 10px 0;
 	/* width: 200px; */
 	box-sizing: border-box;
 }
@@ -243,10 +316,13 @@ main{
  }
   @media (max-width: 700px){
   	aside#left, header > #title{
-  		/* width: 40vw!important; */
+  		width: 40vw!important;
   	}
+		aside#left{
+			/* display: none; */
+		}
  	main{
- 		/* margin-left: 40vw; */
+ 		margin-left: 40vw;
  	}
   }
 
@@ -361,9 +437,7 @@ aside.sidebar > .container > .content > *:not(ul){
 	margin-left: -40vw!important;
 }
 
-.full{
-	margin-left: 0!important;
-}
+
 
 #arrow{
     font-size: 18px;
@@ -476,6 +550,9 @@ aside#left, header > #title{
 	width: 50px;
 }
 
+body{
+	background: #ABD0DA;
+}
 
 body > #wrapper{
 		top: 10vh;
@@ -486,6 +563,18 @@ body > #wrapper{
 
 }
 
+table#survey td{
+	padding: 5px;
+}
+table#survey tr:nth-child(even) {
+    background: rgba(57, 144, 169, .1);
+}
+table#survey td:not(.question){
+	text-align: center;
+}
+table#survey th{
+	padding: 6px;
+}
 
 
 header{
@@ -534,6 +623,24 @@ nav input[type=text]{
 	width: 300px;
 }
 
+.center{
+	margin: 0 auto;
+}
+
+.button{
+	display: flex;
+	flex-direction: column;
+	background: #3990a9;
+	color: #fff;
+	width: 50%;
+	border-radius: 10px;
+	height: 50px;
+	justify-content: center;
+	align-items: center;
+	font-weight: 700;
+	margin: 50px auto;
+	border:  0;
+}
 
 #menu_button> * {
     width: 30px;

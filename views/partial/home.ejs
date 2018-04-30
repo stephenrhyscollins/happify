@@ -1,0 +1,45 @@
+<!-- views/partial/calendar.ejs -->
+<div class="card padding">
+  <h1>Welcome, <%=user.name.givenName%> </h1>
+  <h2>In order to personalise your experience, we need to know a bit about you...</h2>
+
+</div>
+<div class="card">
+  <h3 class="padding">I need help with...</h3>
+  <div class="wide list-flex-column">
+    <!--form action="#" method="get">
+      <input id="depression" type="checkbox" name="course" value="depression">
+      <label for="depression">
+        <img src='assets/images/icons/depression.png'/>
+        <h1>Depression</h1>
+      </label>
+      <input id="anxiety" type="checkbox" name="course" value="anxiety">
+      <label for="anxiety">
+        <img src='assets/images/icons/anxiety.png'/>
+        <h1>Anxiety</h1>
+      </label>
+      <input id="self-esteem" type="checkbox" name="course" value="self-esteem">
+      <label for="self-esteem">
+        <img src='assets/images/icons/self-esteem.png'/>
+        <h1>Self esteem</h1>
+      </label>
+    </form-->
+    <form action="/action_page.php">
+      <div id="courses">
+        <span id="depression">
+          <label for="depression">Depression</label>
+          <input type="checkbox" name="course" id="depression" value="depression"><br>
+        </span>
+        <span id="anxiety">
+          <label for="anxiety">Anxiety</label>
+          <input type="checkbox" name="course" id="anxiety" value="anxiety"><br>
+        </span>
+        <span id="self-esteem">
+          <label for="self-esteem">Self-esteem</label>
+          <input type="checkbox" name="course" id="self-esteem" value="self-esteem"><br>
+        </span>
+      </div>
+        <input class="button" type="submit" value="Get Started!">
+</form>
+  </div>
+</div>

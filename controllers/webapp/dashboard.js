@@ -28,11 +28,7 @@ router.get('/htmltest', (req, res, next) => {
 });
 
 
-router.post('/', (req, res, next) => {
-    res.status(201).json({
-        message: 'Handling POST requests to /products'
-    });
-});
+
 
 router.get('/:eventId', (req, res, next) => {
     const id = req.params.eventId;
