@@ -7,7 +7,11 @@ const userSchema = new Schema({
   facebookId : String,
   name : Object,
   gender : String,
-  profileImage : String
+  profileImage : String,
+  exercises : {
+    active : Object,
+    completed : Object
+  }
 });
 
 const User = mongoose.model('user', userSchema);

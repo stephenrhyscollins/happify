@@ -4,6 +4,8 @@ var bodyParser = require('body-parser');
 const passsportSetup = require('./config/passport-authentication');
 const dashboardController = require('./controllers/webapp/dashboard');
 const activitiesController = require('./controllers/webapp/activities');
+const courseController = require('./controllers/api/course');
+const exerciseController = require('./controllers/api/exercise');
 const notifyController = require('./controllers/webapp/notify');
 const authController = require('./controllers/api/auth');
 const mongoose = require('mongoose');
@@ -40,6 +42,8 @@ app.use(passport.session());
 //Set routing paths
 app.use('/dashboard', dashboardController);
 app.use('/activities', activitiesController);
+app.use('/course', courseController);
+app.use('/exercise', exerciseController);
 //Set routing paths
 app.use('/notify', notifyController);
 //Set routing paths

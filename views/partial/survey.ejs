@@ -1,21 +1,21 @@
-<!-- views/partial/survey.ejs -->
-<h1><%=survey.title%></h1>
-<h3><%=survey.description%></h3>
-<span id="id" hidden><%=survey.id%></span>
+<!-- views/partial/session.data.ejs -->
+<h1><%=session.exercise.name%></h1>
+<h3><%=session.exercise.description%></h3>
+<span id="id" hidden><%=session.id%></span>
 <table id="survey">
   <tr>
     <th></th>
-    <%for(var r=0; r < survey.responses.length; r++){ %>
-      <th><%=survey.responses[r].response%></th>
+    <%for(var r=0; r < session.exercise.data.responses.length; r++){ %>
+      <th><%=session.exercise.data.responses[r].response%></th>
       <%}%>
   </tr>
 
 
-<% for(var q=0; q < survey.questions.length; q++) { %>
+<% for(var q=0; q < session.exercise.data.questions.length; q++) { %>
    <tr>
-     <td class="question"><%=survey.questions[q] %></td>
-     <%for(var r=0; r < survey.responses.length; r++){ %>
-       <td><input type="radio" name="<%=q%>" checked value="<%=survey.responses[r].value%>"></td>
+     <td class="question"><%=session.exercise.data.questions[q] %></td>
+     <%for(var r=0; r < session.exercise.data.responses.length; r++){ %>
+       <td><input type="radio" name="<%=q%>" checked value="<%=session.exercise.data.responses[r].value%>"></td>
      <%}%>
    </tr>
 <% } %>
@@ -29,7 +29,7 @@ function submit(){
         type: 'POST',
         url: '/activities/survey/submit',
         data: {
-          surveyId: "<%=survey.id%>",
+          surveyId: "<%=session.id%>",
           responses: result.responses,
           score : result.score
         },

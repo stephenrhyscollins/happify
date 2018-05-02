@@ -13,8 +13,9 @@ $(document).ready(function(){
   resize();
 
 	var url = String(document.location);
-	url = url.split("#");
-	if(url.length > 1 && url[1].length > 0){populateContent(url[1], container, nav.find('#'+url[1]));}
+	url = url.split("dashboard/");
+	loadPartial({target : {id: url[1]}});
+
 
 	suggested = $( ".suggested" ).draggable({
 		helper:'clone'
@@ -33,18 +34,19 @@ $(document).ready(function(){
         navigator.serviceWorker.ready.then(function(reg){
 	          if(checkPushNotificationSupport(reg) && !isSubscribed(reg)){
 	            subscribe(reg);
-	          };
+	          }
         });
     });
 	});
 
-function loadPartial(e){
-    //check the user clicked an item in the list not just the list
-    if(e.target != e.currentTarget){
-			populateContent(e.target.id, container, $(e.target), true);
-      document.title = "Happify | " + e.target.id;
-		  $('main').attr('id', e.target.id);
-    }
+function loadPartial(view){
+		partial = String(view.target.id);
+  	if(partial.includes("/")){
+			partial = partial.split("/")
+			populateContent({partial: "/exercise/render/" + partial[1]}, container, $("li[id*='"+view.target.id+"']"), view.target.id);
+		} else{
+			populateContent({partial: "/dashboard/render/" + partial}, container, nav.find('#'+partial), view.target.id);
+		}
 	}
 
 	function changeSelectedTab(selectedTab){
@@ -61,15 +63,19 @@ function loadPartial(e){
 function populateContent(view, container, selectedTab, push){
 	$.ajax({
 		 type: "GET",
-		 url: '/activities/' + view,
+		 url: view.partial,
 		 contentType: "text/plain",
 		 success: function(data){
       if (data){
           container.html(data);
-					if(push){history.pushState(view, null, '#'+view);}
-					changeSelectedTab(selectedTab);
-		      document.title = "Happify | " + view;
-				  $('main').attr('id', view);
+					if(push && (history.state) && (view.partial != history.state.partial)){
+						history.pushState(view, null, "/dashboard/"+push);
+					}else if(push){
+						history.pushState(view, null, "/dashboard/"+push);
+					}
+					if(selectedTab){changeSelectedTab(selectedTab);}
+		      document.title = "Happify | " + view.partial;
+				  $('main').attr('id', view.partial);
       }
 		}
 	});
@@ -78,12 +84,17 @@ function populateContent(view, container, selectedTab, push){
 
 window.onpopstate = function(e){
 	if(e.state){
-		refreshState(e.state);
+			refreshState(e.state);
 	}
 };
 
 function refreshState(state){
-		populateContent(state, $('main'), nav.find('#'+state), false);
+		var partial = String(state.partial).split('/');
+		if(partial[1].includes("exercise")){
+			populateContent(state, $('main'), $("li[id*='"+partial[1]+"/"+partial[3]+"']"));
+		}else {
+			populateContent(state, $('main'), nav.find('#'+partial[3]));
+		}
 }
 
 
@@ -130,8 +141,7 @@ function displayNotification() {
       reg.showNotification('Hello world!', options);
     });
   }
-};
-
+}
 
 
 function handleSWRegistration(reg) {
@@ -144,7 +154,7 @@ function handleSWRegistration(reg) {
     }
 
     return reg;
-};
+}
 
 function checkPushNotificationSupport(reg){
   return ((reg.showNotification) && ('PushManager' in window));
@@ -169,7 +179,7 @@ function subscribe(reg){
     console.log("h");
     //Setting the public key of our VAPID key pair.
     subscribeParams.applicationServerKey = urlB64ToUint8Array(applicationServerKey);
-;
+
 
     reg.pushManager.subscribe(subscribeParams)
         .then(function (subscription) {
@@ -183,7 +193,7 @@ function subscribe(reg){
             // A problem occurred with the subscription.
             console.log('Unable to subscribe to push.', e);
         });
-      };
+      }
 
 function sendSubscriptionToServer(subscriptionData) {
     var encodedKey = btoa(String.fromCharCode.apply(null, new Uint8Array(subscriptionData.encodkey)));
@@ -200,7 +210,22 @@ function sendSubscriptionToServer(subscriptionData) {
             console.log('Subscribed successfully! ' + JSON.stringify(response));
         }
     });
-};
+}
+
+function addSession(sessionData) {
+		console.log(sessionData);
+    $.ajax({
+        type: 'POST',
+        url: '/exercise/start',
+        data: sessionData,
+				dataType: 'application/json',
+        success: function (response) {
+            console.log('session added! ' + JSON.stringify(response));
+        }
+    });
+}
+
+
 
   /*var fullscreen = false;
     document.documentElement.addEventListener("click", function() {
@@ -246,7 +271,7 @@ function drawCalendar(date){
 
 	for(var d=0; d<7; d++){
 		htmlText += '<td>' + days[d] + '</td>';
-	};
+	}
 
 	htmlText += "</tr>";
 
@@ -260,7 +285,7 @@ function drawCalendar(date){
 	content.find('#planner').html(htmlText);
 
 
-};
+}
 
 
 function configureDragDrop(){
@@ -275,7 +300,7 @@ function configureDragDrop(){
 	}
 	);
 	content.find('#planner').append("");
-};
+}
 
 
 function updateURL(url, title){
@@ -288,7 +313,7 @@ function updateURL(url, title){
 	  document.location.href = "/"+url;
 		document.title = title;
 	}
-};
+}
 
 
 

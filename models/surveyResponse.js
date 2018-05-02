@@ -5,6 +5,7 @@ const surveyResponseSchema = new Schema({
   surveyId : String,
   userId : String,
   responses : Object,
+  score : Number,
   date: { type: Date, default: Date.now }
 });
 

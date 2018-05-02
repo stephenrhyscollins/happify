@@ -490,7 +490,7 @@ aside.sidebar ul li:hover,.selected{
 }
 
 aside#left{
-	position: relative;
+	/* position: relative; */
 	box-shadow: 4px 0px 6px rgba(0,0,0,.3);
 	/* float: left; */
 	display: block;
@@ -504,7 +504,7 @@ aside#left{
 }
 
 aside#left, header > #title{
-	/* width: 16vw; */
+	flex-basis: 16vw;
 }
 
 #menu_button {

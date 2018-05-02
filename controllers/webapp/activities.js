@@ -28,31 +28,5 @@ router.post('/survey/submit', (req, res) => {
 });
 
 
-router.get('/home', (req, res) => {
-  res.render('partial/home', {user : req.user});
-});
-
-router.get('/track', (req, res) => {
-  res.render('partial/track', {user : req.user});
-});
-
-
-router.get('/survey', (req, res) => {
-  Survey.findById(DEPRESSION_SURVEY).then((survey) => {
-    res.render('partial/survey', {user : req.user, survey : survey});
-  });
-});
-
-router.get('/plan', (req, res) => {
-  res.render('partial/plan', {user : req.user});
-});
-
-router.get('/progress', (req, res) => {
-  res.render('partial/progress', {user : req.user});
-});
-
-router.get('/settings', (req, res) => {
-  res.render('partial/settings', {user : req.user});
-});
 
 module.exports = router;

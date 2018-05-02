@@ -1,15 +1,56 @@
 const router =  require('express').Router();
+const Exercise = require('../../models/exercise');
+const Session = require('../../models/session');
+const User = require('../../models/user');
 var fs = require('fs');
 var bodyParser = require('body-parser');
 router.use(bodyParser.json());
 
+function authorise(req, res, next) {
+  Session.findOne({
+    "id" : req.param.sessionId,
+    "user.id" : req.user.id
+  },
+  function(err, session){
+    if(!err && session){
+      next(req, res, session);
+    }
+    res.redirect('/dashboard');
+  });
+}
+
 
 const authCheck = (req, res, next) => {
-    if(req.user){next(); return;}
-    res.redirect('/');
-  };
+  if(req.user){next(); return;}
+  res.redirect('/');
+};
+
 router.get('/', authCheck, (req, res) => {
-  res.render('dashboard', {user : req.user, m : process.env.MODE});
+  res.render('dashboard', {user : req.user, m : process.env.MODE, partial : 'home'});
+});
+
+router.get('/:view', authCheck, (req, res) => {
+  res.render('dashboard', {user: req.user, m : process.env.MODE, partial: req.params.view});
+});
+
+
+router.get('/render/:view', authCheck, (req, res) => {
+  console.log("render");
+  res.render("partial/"+req.params.view, {user: req.user, m : process.env.MODE});
+});
+
+router.get('/exercise/:sessionId', authCheck, (req, res) => {
+  Session.
+    findOne({
+      _id : req.params.sessionId
+    }).
+    populate('user').
+    populate('exercise').
+    exec(function(err, session){
+      console.log(session);
+      if(err || (session.user.id != req.user.id)){}
+      res.render('dashboard', {user: req.user, session : session, m : process.env.MODE, partial: session.exercise.view});
+    });
 });
 
 
@@ -30,30 +71,19 @@ router.get('/htmltest', (req, res, next) => {
 
 
 
-router.get('/:eventId', (req, res, next) => {
-    const id = req.params.eventId;
-    if (id === 'special') {
-        res.status(200).json({
-            message: 'You discovered the special ID',
-            id: id
-        });
-    } else {
-        res.status(200).json({
-            message: 'You passed an ID'
-        });
+function getExercise(exerciseId, callback){
+  console.log(exerciseId);
+  Exercise.findOne({_id:exerciseId}, function(err, exercise){
+    if(err){
+      console.log('error ' + err );
+      callback(err, null);
+    }else{
+      console.log('users: ' + exercise);
+      callback(null, exercise);
     }
-});
+  })
+};
 
-router.patch('/:eventId', (req, res, next) => {
-    res.status(200).json({
-        message: 'Updated product!'
-    });
-});
 
-router.delete('/:eventId', (req, res, next) => {
-    res.status(200).json({
-        message: 'Deleted product!'
-    });
-});
 
 module.exports = router;
