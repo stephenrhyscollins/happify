@@ -13,6 +13,7 @@ $(document).ready(function(){
   resize();
 
 	var url = String(document.location);
+	url = url.replace('#', '');
 	url = url.split("dashboard/");
 	loadPartial({target : {id: url[1]}});
 
@@ -39,43 +40,51 @@ $(document).ready(function(){
     });
 	});
 
-function loadPartial(view){
-		partial = String(view.target.id);
-  	if(partial.includes("/")){
-			partial = partial.split("/")
-			populateContent({partial: "/exercise/render/" + partial[1]}, container, $("li[id*='"+view.target.id+"']"), view.target.id);
-		} else{
-			populateContent({partial: "/dashboard/render/" + partial}, container, nav.find('#'+partial), view.target.id);
-		}
-	}
+	function loadPartial(view) {
+    partial = String(view.target.id);
+    if (partial.includes("exercise/")) {
+        partial = partial.split("exercise/");
+        partial = "/api/exercise/" + partial[1] + "/render";
+
+    } else if (partial.includes("exercises/")) {
+        partial = partial.split("exercises/");
+        partial = "/api/exercises/" + partial[1] + "/render";
+    } else {
+        partial = "/dashboard/" + partial + "/render";
+    }
+    populateContent({
+        partial: partial,
+        selectedTab: "li[id*='" + view.target.id + "']",
+        showUrl: view.target.id
+    }, container, true);
+}
 
 	function changeSelectedTab(selectedTab){
 		var nav = $("#nav");
 		selectedTab.parent().find(".selected").removeClass("selected");
 		selectedTab.addClass('selected');
-    if($(window).width() < 750){
+    if($().width() < 750){
 
     }
   }
 
 
 
-function populateContent(view, container, selectedTab, push){
+function populateContent(state, container, push){
 	$.ajax({
 		 type: "GET",
-		 url: view.partial,
+		 url: state.partial,
 		 contentType: "text/plain",
 		 success: function(data){
       if (data){
           container.html(data);
-					if(push && (history.state) && (view.partial != history.state.partial)){
-						history.pushState(view, null, "/dashboard/"+push);
-					}else if(push){
-						history.pushState(view, null, "/dashboard/"+push);
+					if((push) && ((history.state == null) || (state.partial != history.state.partial))){
+						history.pushState(state, null, "/dashboard/"+ state.showUrl);
+						console.log('pushed');
 					}
-					if(selectedTab){changeSelectedTab(selectedTab);}
-		      document.title = "Happify | " + view.partial;
-				  $('main').attr('id', view.partial);
+					if(state.selectedTab){changeSelectedTab($(	state.selectedTab));}
+		      document.title = "Happify | " + state.partial;
+				  $('main').attr('id', state.partial);
       }
 		}
 	});
@@ -89,12 +98,7 @@ window.onpopstate = function(e){
 };
 
 function refreshState(state){
-		var partial = String(state.partial).split('/');
-		if(partial[1].includes("exercise")){
-			populateContent(state, $('main'), $("li[id*='"+partial[1]+"/"+partial[3]+"']"));
-		}else {
-			populateContent(state, $('main'), nav.find('#'+partial[3]));
-		}
+		populateContent(state, $('main'));
 }
 
 
@@ -204,7 +208,7 @@ function sendSubscriptionToServer(subscriptionData) {
     $.ajax({
         type: 'POST',
         url: '/subscribe',
-        data: {publicKey: encodedKey, auth: encodedAuth, notificationEndPoint: subscriptionData.endpoint },
+        data: { publicKey : encodedKey, auth: encodedAuth, notificationEndPoint: subscriptionData.endpoint },
 				dataType: 'application/json',
         success: function (response) {
             console.log('Subscribed successfully! ' + JSON.stringify(response));
@@ -230,7 +234,7 @@ function addSession(sessionData) {
   /*var fullscreen = false;
     document.documentElement.addEventListener("click", function() {
       if (fullscreen)
-        document.webkitExitFullscreen();
+        document.webkitExrfitFullscreen();
       else
         document.documentElement.webkitRequestFullscreen();
 

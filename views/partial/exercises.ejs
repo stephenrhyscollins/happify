@@ -1,0 +1,32 @@
+<!-- views/partial/exercises.data.ejs -->
+<h1><%=sessions[0].exercise.name%></h1>
+<h3><%=sessions[0].exercise.description%></h3>
+<table id="exercise">
+  <tr>
+    <th>Entries<th colspan=2>
+  </tr>
+
+<%var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; %>
+<% for(var s=0; s < sessions.length; s++) { %>
+   <tr>
+     <td id="exercise/<%=sessions[s].id%>" class="session">
+        <%=(sessions[s].dateStarted.getDate() + " - " +
+         months[sessions[s].dateStarted.getMonth()] + " - " +
+         sessions[s].dateStarted.getFullYear())%>
+       </p>
+      </td>
+     <td class="session"><%=sessions[s].stats %></td>
+
+   </tr>
+<% } %>
+
+</table>
+
+
+<script>
+$(document).ready(function(){
+  $("td").click(loadPartial);
+
+  // code...
+});
+</script>

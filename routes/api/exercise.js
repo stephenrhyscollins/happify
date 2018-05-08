@@ -34,8 +34,8 @@ function getUser(userId, callback){
   })
 };
 
-router.get('/render/:sessionId', (req, res) =>{
-  console.log("helo");
+router.get('/:sessionId/render', (req, res) =>{
+  console.log(req.params.sessionId);
   Session.
     findOne({
       _id : req.params.sessionId
@@ -45,6 +45,20 @@ router.get('/render/:sessionId', (req, res) =>{
     exec(function(err, session){
       if(err || (session.user.id != req.user.id)){}
       res.render("partial/"+session.exercise.view, {session : session, exercise : session.exercise, user : req.user});
+    });
+});
+
+router.get('/:sessionId', (req, res) =>{
+  console.log(req.params.sessionId);
+  Session.
+    findOne({
+      _id : req.params.sessionId
+    }).
+    populate('user').
+    populate('exercise').
+    exec(function(err, session){
+      if(err || (session.user.id != req.user.id)){}
+      res.send({session : session, exercise : session.exercise, user : req.user});
     });
 });
 

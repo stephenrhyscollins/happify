@@ -64,20 +64,27 @@ router.get('/', function(req, res) {
 
 
 app.post('/subscribe', function(req, res) {
-  console.log(req.body.notificationEndPoint);
-    new Subscription ({
-        deviceId: req.body.notificationEndPoint,
-        p256dh: req.body.publicKey,
-        auth: req.body.auth
-    }).save();
+  /*Subscription.findOne({endpoint : req.body.notificationEndPoint}).
+  then((subscription) => {
+    console.log("found: " + subscription);
+    /*if(!subscription){
+      new Subscription ({
+          deviceId: req.body.notificationEndPoint,
+          p256dh: req.body.publicKey,
+          auth: req.body.auth
+      });
+
+  }).catch(err =>{});*/
 });
+
+
 
 router.post('/unsubscribe', function (req, res) {
   /*  let endpoint = req.body['notificationEndPoint'];
 
     subscribers = subscribers.filter(subscriber => { endpoint == subscriber.endpoint });
 
-    res.send('Subscription removed!');
+    res.send('Subscription removed!Z');
     */
 });
 

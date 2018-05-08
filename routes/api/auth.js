@@ -15,11 +15,14 @@ router.get(
   '/google/redirect',
   passport.authenticate('google'),
   (req, res, next) => {
-    res.redirect('/dashboard');
+    res.redirect('/dashboard/home');
   }
 );
 
 router.get('/', (req, res, next) => {
+  if(req.user){
+    res.redirect('../dashboard')
+  }
   res.render('landing');
 });
 

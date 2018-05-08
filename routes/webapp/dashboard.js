@@ -26,20 +26,20 @@ const authCheck = (req, res, next) => {
 };
 
 router.get('/', authCheck, (req, res) => {
-  res.render('dashboard', {user : req.user, m : process.env.MODE, partial : 'home'});
+  res.redirect('/dashboard/home');
 });
 
 router.get('/:view', authCheck, (req, res) => {
-  res.render('dashboard', {user: req.user, m : process.env.MODE, partial: req.params.view});
+  res.render('dashboard', {user: req.user, m : process.env.MODE});
 });
 
 
-router.get('/render/:view', authCheck, (req, res) => {
+router.get('/:view/render', authCheck, (req, res) => {
   console.log("render");
   res.render("partial/"+req.params.view, {user: req.user, m : process.env.MODE});
 });
 
-router.get('/exercise/:sessionId', authCheck, (req, res) => {
+/*router.get('/exercise/:sessionId', authCheck, (req, res) => {
   Session.
     findOne({
       _id : req.params.sessionId
@@ -51,6 +51,10 @@ router.get('/exercise/:sessionId', authCheck, (req, res) => {
       if(err || (session.user.id != req.user.id)){}
       res.render('dashboard', {user: req.user, session : session, m : process.env.MODE, partial: session.exercise.view});
     });
+});
+*/
+router.get('/exercises/:exerciseId', authCheck, (req, res) => {
+    res.render('dashboard', {user: req.user, m : process.env.MODE});
 });
 
 

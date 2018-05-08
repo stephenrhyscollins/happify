@@ -17,7 +17,7 @@ if(!process.env.MODE){
     GOOGLE : {
       clientID: (process.env.GOOGLE_CLIENTID + ".apps.googleusercontent.com"),
       clientSecret: process.env.GOOGLE_CLIENTSECRET,
-      callbackURL : process.env.GOOGLE_CALLBACKURI || '/auth/google/redirect'
+      callbackURL : process.env.GOOGLE_CALLBACKURI || '/api/auth/google/redirect'
     }
   }
 }

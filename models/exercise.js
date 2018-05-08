@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const exerciseSchema = new Schema({
   name : String,
   description : String,
+  instructions : [String],
   data : Object,
   view : String
 });
