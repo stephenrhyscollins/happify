@@ -2,13 +2,13 @@ const express = require('express');
 const app = express();
 var bodyParser = require('body-parser');
 const passsportSetup = require('./config/passport-authentication');
-const dashboardController = require('./routes/webapp/dashboard');
-const activitiesController = require('./routes/webapp/activities');
-const courseController = require('./routes/api/course');
-const exerciseController = require('./routes/api/exercise');
-const exercisesController = require('./routes/api/exercises');
-const notifyController = require('./routes/webapp/notify');
-const authController = require('./routes/api/auth');
+const dashboardRouting = require('./routes/webapp/dashboard');
+const activitiesRouting = require('./routes/webapp/activities');
+const courseRouting = require('./routes/api/course');
+const exerciseRouting = require('./routes/api/exercise').router;
+const exercisesRouting = require('./routes/api/exercises');
+const notifyRouting = require('./routes/webapp/notify');
+const authRouting = require('./routes/api/auth');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
@@ -41,15 +41,15 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 //Set routing paths
-app.use('/dashboard', dashboardController);
-app.use('/api/activities', activitiesController);
-app.use('/api/course', courseController);
-app.use('/api/exercise', exerciseController);
-app.use('/api/exercises', exercisesController);
+app.use('/dashboard', dashboardRouting);
+app.use('/api/activities', activitiesRouting);
+app.use('/api/course', courseRouting);
+app.use('/api/exercise', exerciseRouting);
+app.use('/api/exercises', exercisesRouting);
 //Set routing paths
-app.use('/notify', notifyController);
+app.use('/notify', notifyRouting);
 //Set routing paths
-app.use('/api/auth', authController);
+app.use('/api/auth', authRouting);
 //Use default express middleware to handle retrieving static files
 app.use('/assets', express.static('assets'));
 

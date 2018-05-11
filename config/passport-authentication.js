@@ -1,6 +1,8 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 const FacebookStrategy = require('passport-facebook');
+const exercise = require('../routes/api/exercise');
+const Session = require('../models/session')
 const User = require('../models/user');
 const cookieSession = require('cookie-session');
 var credentials;
@@ -43,6 +45,7 @@ function googleCallback(accessToken, refreshToken, profile, done){
    User.findOne({googleId : profile.id}).then((user) => {
      if(!user){
        user = createUser(profile).then((user) => {
+         createSessions(user);
          done(null,user);
        });
      }else{done(null, user)};
@@ -61,6 +64,20 @@ var createUser = function(profile){
       profileImage : profile._json.image.url
     }).save().then((user) => {
         resolve(user);
+    });
+  });
+}
+
+var createSessions = function(user){
+  var exercises = ["Activity Tracking", "Activity Planning", "Journal"]
+  exercises.forEach(function(item){
+    exercise.getExercise(null, item, function(err, exercise){
+      if(!err){
+        new Session({
+          user: user,
+          exercise : exercise
+        }).save();
+      }
     });
   });
 }

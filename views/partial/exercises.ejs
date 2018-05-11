@@ -1,9 +1,9 @@
 <!-- views/partial/exercises.data.ejs -->
-<h1><%=sessions[0].exercise.name%></h1>
-<h3><%=sessions[0].exercise.description%></h3>
+<h1><%=exercise.name%></h1>
+<h3><%=exercise.description%></h3>
 <table id="exercise">
-  <tr>
-    <th>Entries<th colspan=2>
+    <th>Date</th>
+    <th>Score</th>
   </tr>
 
 <%var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; %>
@@ -14,9 +14,10 @@
          months[sessions[s].dateStarted.getMonth()] + " - " +
          sessions[s].dateStarted.getFullYear())%>
        </p>
-      </td>
-     <td class="session"><%=sessions[s].stats %></td>
-
+     </td>
+   <%if(sessions[s].data && sesson[s].data.score){%>
+     <td class="session"><%=sessions[s].data.score%></td>
+   <%}%>
    </tr>
 <% } %>
 

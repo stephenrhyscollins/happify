@@ -29,13 +29,17 @@ router.get('/', authCheck, (req, res) => {
   res.redirect('/dashboard/home');
 });
 
+router.get('/exercise/:sessionId', (req, res) => {
+  res.render('dashboard', {user : req.user, m : process.env.MODE})
+});
+
 router.get('/:view', authCheck, (req, res) => {
   res.render('dashboard', {user: req.user, m : process.env.MODE});
 });
 
 
 router.get('/:view/render', authCheck, (req, res) => {
-  console.log("render");
+  console.log("hi");
   res.render("partial/"+req.params.view, {user: req.user, m : process.env.MODE});
 });
 
